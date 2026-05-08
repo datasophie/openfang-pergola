@@ -1,0 +1,44 @@
+version: v1
+
+components:
+- name: openfang
+  docker:
+    file: Dockerfile
+    platform: 
+    - arch: amd64
+    - arch: arm64
+  storage:
+  - name: data
+    path: /data
+    size: 20Gi
+  ports:
+  - 4200
+  ingresses:
+  - host: dashboard
+    path: /
+    port: 4200
+    sticky: true
+  files:
+  - path: /data/.env
+    config-ref: .env
+    content: |
+      # OpenFang Environment Variables
+      # Optional: set provider keys or integration secrets here.
+      # The dashboard can start without provider keys; add them when needed.
+      # For details, see:
+      # https://raw.githubusercontent.com/RightNow-AI/openfang/refs/heads/main/.env.example
+      #
+
+  env:
+  - name: OPENFANG_HOME
+    value: /data
+  - name: OPENFANG_LISTEN
+    value: 0.0.0.0:4200
+  - name: OPENFANG_API_KEY
+    config-ref: OPENFANG_API_KEY
+  - name: RUST_LOG
+    config-ref: RUST_LOG
+    value: info
+  - name: EDITOR
+    config-ref: EDITOR
+    value: nano

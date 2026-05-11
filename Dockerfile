@@ -7,4 +7,5 @@ FROM public.ecr.aws/pergola/rightnow-ai/openfang:v0.6.4
 RUN apt-get update && apt-get install -y --no-install-recommends \
     vim \
     nano \
+    chromium \
     && rm -rf /var/lib/apt/lists/*

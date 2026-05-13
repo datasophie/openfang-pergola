@@ -10,7 +10,7 @@ components:
   storage:
   - name: data
     path: /data
-    size: 20Gi
+    size: 8Gi
   ports:
   - 4200
   ingresses:
